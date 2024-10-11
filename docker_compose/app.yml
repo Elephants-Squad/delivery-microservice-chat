@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  microservice-chat-app-backend:
+    image: microservice-chat-app-backend
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: microservice-chat-app-backend
+    command: "uvicorn --factory app.application.api.main:app --reload --host 0.0.0.0 --port 8000"
+    ports:
+      - "${API_PORT}:8000"
+    env_file:
+      - ../.env
