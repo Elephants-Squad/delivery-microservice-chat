@@ -13,6 +13,10 @@ app:
 app-down:
 	$(DC) -f $(APP_FILE) down
 
+.PHONY: app-shell
+app-shell:
+	$(EXEC) -f $(APP_FILE) bash
+
 .PHONY: app-logs
 app-logs:
 	$(LOGS) $(APP_CONTAINER) -f

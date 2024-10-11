@@ -3,7 +3,8 @@ from fastapi import FastAPI
 app = FastAPI(
     title="Microservice for messages",
     docs_url="/api/docs",
-    description="A simple microservice written with DDD pattern for messaging with users"
+    description="A simple microservice written with DDD pattern for messaging with users",
+    debug=True,
 )
 
 
