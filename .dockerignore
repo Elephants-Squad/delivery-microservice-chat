@@ -1,0 +1,4 @@
+.venv/
+.gitignore
+poetry.lock
+test_main.http

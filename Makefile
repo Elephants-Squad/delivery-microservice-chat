@@ -3,7 +3,7 @@ EXEC = docker exec -it
 LOGS = docker logs
 ENV = --env-file .env
 APP_FILE = docker_compose/app.yml
-APP_CONTAINER = app
+APP_CONTAINER = microservice-chat-app-backend
 
 .PHONY: app
 app:
@@ -15,7 +15,7 @@ app-down:
 
 .PHONY: app-shell
 app-shell:
-	$(EXEC) -f $(APP_FILE) bash
+	$(EXEC) $(APP_CONTAINER) bash
 
 .PHONY: app-logs
 app-logs:
