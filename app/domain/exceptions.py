@@ -22,3 +22,12 @@ class ObsceneTextException(ValidationException):
     @property
     def message(self) -> str:
         return f"{self.text} is an obscene text"
+
+
+@dataclass
+class EmptyTextException(ValidationException):
+    text: str = ""
+
+    @property
+    def message(self) -> str:
+        return "Empty text"

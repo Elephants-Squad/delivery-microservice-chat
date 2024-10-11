@@ -2,10 +2,10 @@ import re
 
 from dataclasses import dataclass
 from app.domain.values.base import BaseValueObject
-from app.domain.exceptions import TextTooLongException, ObsceneTextException
+from app.domain.exceptions import TextTooLongException, ObsceneTextException, EmptyTextException
 from typing import NoReturn
 
-pattern = """
+pattern = r"""
 (?iux)(?<![а-яё])(?:
 (?:(?:у|[нз]а|(?:хитро|не)?вз?[ыьъ]|с[ьъ]|(?:и|ра)[зс]ъ?|(?:о[тб]|п[оа]д)[ьъ]?|(?:\S(?=[а-яё]))+?[оаеи-])-?)?(?:
   [её](?:б(?!о[рй]|рач)|п[уа](?:ц|тс))|
@@ -40,12 +40,34 @@ pattern = """
 )(?![а-яё])
 """
 
+
 @dataclass(frozen=True)
 class Text(BaseValueObject):
     value: str
 
     def validate(self) -> NoReturn:
+        if not self.value:
+            raise EmptyTextException()
+
         if len(self.value) > 255:
+            raise TextTooLongException(self.value)
+
+        if re.match(pattern.strip(), self.value):
+            raise ObsceneTextException(self.value)
+
+    def as_generic_object(self) -> str:
+        return self.value
+
+
+@dataclass(frozen=True)
+class Title(BaseValueObject):
+    value: str
+
+    def validate(self) -> NoReturn:
+        if not self.value:
+            raise EmptyTextException()
+
+        if len(self.value) > 30:
             raise TextTooLongException(self.value)
 
         if re.match(pattern.strip(), self.value):
