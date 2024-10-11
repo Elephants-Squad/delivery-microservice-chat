@@ -49,9 +49,6 @@ class Text(BaseValueObject):
         if not self.value:
             raise EmptyTextException()
 
-        if len(self.value) > 255:
-            raise TextTooLongException(self.value)
-
         if re.match(pattern.strip(), self.value):
             raise ObsceneTextException(self.value)
 

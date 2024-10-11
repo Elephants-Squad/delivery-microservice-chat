@@ -10,6 +10,8 @@ from app.domain.entities.base import BaseEntity
 @dataclass(frozen=True)
 class Message(BaseEntity):
     text: Text
+    __hash__ = BaseEntity.__hash__
+    __eq__ = BaseEntity.__eq__
 
 
 @dataclass(frozen=True)
@@ -19,3 +21,8 @@ class Chat(BaseEntity):
         default_factory=set,
         kw_only=True
     )
+    __hash__ = BaseEntity.__hash__
+    __eq__ = BaseEntity.__eq__
+
+    def add_message(self, message: Message) -> None:
+        self.messages.add(message)
