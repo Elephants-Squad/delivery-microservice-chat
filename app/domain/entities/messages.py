@@ -1,3 +1,5 @@
+__all__ = ["Message", "Chat"]
+
 from dataclasses import dataclass, field
 from typing import Set
 
