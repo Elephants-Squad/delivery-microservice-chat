@@ -3,6 +3,7 @@ __all__ = ["Message", "Chat"]
 from dataclasses import dataclass, field
 from typing import Set
 
+from app.domain.events.messages import NewMessageReceivedEvent
 from app.domain.values.messages import Text, Title
 from app.domain.entities.base import BaseEntity
 
@@ -26,3 +27,8 @@ class Chat(BaseEntity):
 
     def add_message(self, message: Message) -> None:
         self.messages.add(message)
+        self.register_event(NewMessageReceivedEvent(
+            message_text=message.text.as_generic_type(),
+            chat_oid=self.oid,
+            message_oid=message.oid,
+        ))

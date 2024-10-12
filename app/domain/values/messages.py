@@ -3,9 +3,9 @@ import re
 from dataclasses import dataclass
 from app.domain.values.base import BaseValueObject
 from app.domain.exceptions import TextTooLongException, ObsceneTextException, EmptyTextException
-from typing import NoReturn
+from typing import NoReturn, Final
 
-pattern = r"""
+pattern: Final[str] = r"""
 (?iux)(?<![а-яё])(?:
 (?:(?:у|[нз]а|(?:хитро|не)?вз?[ыьъ]|с[ьъ]|(?:и|ра)[зс]ъ?|(?:о[тб]|п[оа]д)[ьъ]?|(?:\S(?=[а-яё]))+?[оаеи-])-?)?(?:
   [её](?:б(?!о[рй]|рач)|п[уа](?:ц|тс))|
@@ -52,7 +52,7 @@ class Text(BaseValueObject):
         if re.match(pattern.strip(), self.value):
             raise ObsceneTextException(self.value)
 
-    def as_generic_object(self) -> str:
+    def as_generic_type(self) -> str:
         return self.value
 
 
@@ -70,5 +70,5 @@ class Title(BaseValueObject):
         if re.match(pattern.strip(), self.value):
             raise ObsceneTextException(self.value)
 
-    def as_generic_object(self) -> str:
+    def as_generic_type(self) -> str:
         return self.value
