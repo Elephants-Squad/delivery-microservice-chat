@@ -1,5 +1,4 @@
 name: main-workflow
-run-name: ${{ .github.actor }} is testing changes
 on: [ push, pull_request ]
 
 jobs:
