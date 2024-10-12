@@ -1,33 +1,32 @@
 name: main-workflow
 run-name: ${{ .github.actor }} is testing changes
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
-  jobs:
-    ci:
-      strategy:
-        fail-fast: false
-        matrix:
-          python-version: [ "3.8", "3.9", "3.10", "3.11" ]
-          poetry-version: [ "1.2.2", "1.7.1" ]
-          os: [ ubuntu-22.04, macos-latest, windows-latest ]
-        runs-on: ${{ matrix.os }}
-      steps:
-        - uses: actions/checkout@v4
-        - name: Install Python
-          uses: actions/setup-python@v4
-        - name: Install poetry
-          uses: abatilo/actions-poetry@v2
-        - name: Setup a local virtual environment
-          run: |
-            poetry config virtualenvs.create true --local
-            poetry config virtualenvs.in-project true --local
-        - uses: actions/cache@v3
-          name: Define a cache for the virtual environment based on the dependencies lock file
-          with:
-            path: ./.venv
-            key: venv-${{ hashFiles('poetry.lock') }}
-        - name: Install the project dependencies
-          run: poetry install
-        - name: Run the automated tests (for example)
-          run: poetry run pytest -v
+  ci:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.8", "3.9", "3.10", "3.11" ]
+        poetry-version: [ "1.2.2", "1.7.1" ]
+        os: [ ubuntu-22.04, macos-latest, windows-latest ]
+      runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v4
+      - name: Install poetry
+        uses: abatilo/actions-poetry@v2
+      - name: Setup a local virtual environment
+        run: |
+          poetry config virtualenvs.create true --local
+          poetry config virtualenvs.in-project true --local
+      - uses: actions/cache@v3
+        name: Define a cache for the virtual environment based on the dependencies lock file
+        with:
+          path: ./.venv
+          key: venv-${{ hashFiles('poetry.lock') }}
+      - name: Install the project dependencies
+        run: poetry install
+      - name: Run the automated tests (for example)
+        run: poetry run pytest -v
