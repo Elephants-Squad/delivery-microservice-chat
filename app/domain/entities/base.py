@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from app.domain.events.base import BaseEvent
 
 
-@dataclass(frozen=True)
+@dataclass
 class BaseEntity(ABC):
     oid: str = field(
         default_factory=lambda: str(uuid4()),

@@ -5,7 +5,7 @@ import random
 from datetime import datetime, UTC
 from app.domain.values.messages import Text, Title
 from app.domain.entities.messages import Message, Chat
-from app.domain.exceptions import ObsceneTextException, EmptyTextException, TextTooLongException
+from app.domain.exceptions.message import ObsceneTextException, EmptyTextException, TitleTooLongException
 from mimesis import Text as MimesisText
 
 from app.domain.events.messages import NewMessageReceivedEvent
@@ -57,7 +57,7 @@ def test_create_chat_success(name):
 
 
 def test_create_chat_failure(mimesis_object):
-    with pytest.raises(TextTooLongException):
+    with pytest.raises(TitleTooLongException):
         Title(mimesis_object.title() * 250)
 
 
