@@ -25,6 +25,12 @@ class Chat(BaseEntity):
     __hash__ = BaseEntity.__hash__
     __eq__ = BaseEntity.__eq__
 
+    @classmethod
+    def create_chat(cls, title: Title) -> "Chat":
+        new_chat = cls(title=title)
+        new_chat.register_event(NewMessageReceivedEvent())
+        return new_chat
+
     def add_message(self, message: Message) -> None:
         self.messages.add(message)
         self.register_event(NewMessageReceivedEvent(

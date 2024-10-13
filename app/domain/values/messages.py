@@ -2,7 +2,7 @@ import re
 
 from dataclasses import dataclass
 from app.domain.values.base import BaseValueObject
-from app.domain.exceptions import TextTooLongException, ObsceneTextException, EmptyTextException
+from app.domain.exceptions.message import TitleTooLongException, ObsceneTextException, EmptyTextException
 from typing import NoReturn, Final
 
 pattern: Final[str] = r"""
@@ -65,7 +65,7 @@ class Title(BaseValueObject):
             raise EmptyTextException()
 
         if len(self.value) > 30:
-            raise TextTooLongException(self.value)
+            raise TitleTooLongException(self.value)
 
         if re.match(pattern.strip(), self.value):
             raise ObsceneTextException(self.value)
