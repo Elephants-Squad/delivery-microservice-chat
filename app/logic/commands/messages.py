@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from app.infrastucture.repositories.messages import BaseChatsRepository
+from app.infrastucture.repositories.messages.base import BaseChatsRepository
 from app.logic.commands.base import BaseCommand, CommandHandler
 from app.domain.entities.messages import Chat
 from app.logic.exceptions.messages import ChatWithThatTitleAlreadyExistsException

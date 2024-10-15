@@ -1,11 +1,10 @@
-from dataclasses import dataclass
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from typing import Iterable
 
 from app.domain.entities.messages import (
     Chat,
     ChatListener,
-    Message,
 )
 
 
