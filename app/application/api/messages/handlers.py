@@ -1,11 +1,7 @@
 from fastapi import APIRouter, HTTPException, status
-from typing import Annotated
-
-from fastapi.params import Depends
 
 from app.application.api.messages.schemas import CreateChatRequestSchema, CreateChatResponseSchema
 from app.domain.exceptions.base import ApplicationException
-from app.logic.container import get_container
 from app.logic.mediator import Mediator
 from app.logic.dependecies import Service
 from app.logic.commands.messages import CreateChatCommand

@@ -1,5 +1,3 @@
-import functools
-
 from fastapi import Depends, Request
 from typing import Type, TypeVar, Callable, Any
 

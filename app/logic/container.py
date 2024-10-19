@@ -1,5 +1,3 @@
-import functools
-
 from app.infrastucture.repositories.messages.base import BaseChatsRepository
 from app.infrastucture.repositories.messages.memory import MemoryChatRepository
 
@@ -30,8 +28,3 @@ class ContainerConfig:
         self.register_services()
         self.register_mediator()
         return self.container
-
-@functools.lru_cache(1)
-def get_container() -> punq.Container:
-    config = ContainerConfig()
-    return config.build()
