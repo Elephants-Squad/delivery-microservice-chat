@@ -11,11 +11,6 @@ from mimesis import Text as MimesisText
 from app.domain.events.messages import NewMessageReceivedEvent
 
 
-@pytest.fixture(scope='module')
-def mimesis_object():
-    return MimesisText()
-
-
 @pytest.mark.parametrize("sentence", [
     MimesisText().sentence() * i for i in range(1, 10)
 ])
