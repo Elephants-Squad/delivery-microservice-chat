@@ -17,8 +17,7 @@ app = VersionedFastAPI(
     prefix_format='/api/v{major}'
 )
 
-container_cfg = ContainerConfig()
-app.state.ioc_container = container_cfg.build()
+app.state.ioc_container = ContainerConfig().build()
 
 app.include_router(messages_router)
 
@@ -37,3 +36,5 @@ app.add_middleware(
                    "Access-Control-Allow-Origin",
                    "Authorization"],
 )
+
+

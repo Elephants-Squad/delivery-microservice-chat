@@ -21,5 +21,6 @@ class CreateChatCommandHandler(CommandHandler[CreateChatCommand, Chat]):
             raise ChatWithThatTitleAlreadyExistsException(command.title)
 
         title = Title(value=command.title)
-        chat = Chat.create_chat(title)
-        return chat
+        new_chat = Chat.create_chat(title)
+        await self.chat_repository.add_chat(new_chat)
+        return new_chat
