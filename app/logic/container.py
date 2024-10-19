@@ -32,6 +32,5 @@ class ContainerConfig:
         return self.container
 
 
-@functools.lru_cache(1)
 def get_container() -> punq.Container:
     return ContainerConfig().build()

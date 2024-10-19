@@ -22,19 +22,19 @@ async def test_create_chat_command_success(
     assert await chat_repository.check_chat_exists_by_title(title=chat.title.as_generic_type())
 
 
-# @pytest.mark.asyncio
-# async def test_create_chat_command_title_already_exists(
-#     chat_repository: BaseChatsRepository,
-#     mediator: Mediator,
-#     mimesis_object: Text,
-# ):
-#     title_text = ''.join(mimesis_object.words(quantity=3))
-#     chat = Chat(title=Title(title_text))
-#     await chat_repository.add_chat(chat)
-#
-#     assert chat in chat_repository._saved_chats
-#
-#     with pytest.raises(ChatWithThatTitleAlreadyExistsException):
-#         await mediator.handle_command(CreateChatCommand(title=title_text))
-#
-#     assert len(chat_repository._saved_chats) == 1
+@pytest.mark.asyncio
+async def test_create_chat_command_title_already_exists(
+    chat_repository: BaseChatsRepository,
+    mediator: Mediator,
+    mimesis_object: Text,
+):
+    title_text = ''.join(mimesis_object.words(quantity=3))
+    chat = Chat(title=Title(title_text))
+    await chat_repository.add_chat(chat)
+
+    assert chat in chat_repository._saved_chats
+
+    with pytest.raises(ChatWithThatTitleAlreadyExistsException):
+        await mediator.handle_command(CreateChatCommand(title=title_text))
+
+    assert len(chat_repository._saved_chats) == 1
