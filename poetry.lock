@@ -77,6 +77,21 @@ all = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>
 standard = ["email-validator (>=2.0.0)", "fastapi-cli[standard] (>=0.0.5)", "httpx (>=0.23.0)", "jinja2 (>=2.11.2)", "python-multipart (>=0.0.7)", "uvicorn[standard] (>=0.12.0)"]
 
 [[package]]
+name = "fastapi-versioning"
+version = "0.10.0"
+description = "api versioning for fastapi web applications"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "fastapi_versioning-0.10.0-py3-none-any.whl", hash = "sha256:afe0ad7a56383b884c399341260bd3301b40e5a1cf9f6dc4211a349489087e1b"},
+    {file = "fastapi_versioning-0.10.0.tar.gz", hash = "sha256:5c18ea4e9ae1afd39c9e5bed1c240bf1cabdc75217579af78249ccb651c7b5b5"},
+]
+
+[package.dependencies]
+fastapi = ">=0.56.0"
+starlette = "*"
+
+[[package]]
 name = "h11"
 version = "0.14.0"
 description = "A pure-Python, bring-your-own-I/O implementation of HTTP/1.1"
@@ -420,4 +435,4 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "af1fe3af78e151fb3fad005870a028115519ce9da5618e3fb7a5f9e78b0c64fc"
+content-hash = "08cd8a0f14e680ee2e51fb3a2e472e7c2ebcdb3d98052da36c7afb2ab3bb7ed9"

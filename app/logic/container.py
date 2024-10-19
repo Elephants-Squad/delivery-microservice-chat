@@ -1,36 +1,37 @@
-from punq import Container
-
-from functools import lru_cache
+import functools
 
 from app.infrastucture.repositories.messages.base import BaseChatsRepository
 from app.infrastucture.repositories.messages.memory import MemoryChatRepository
 
 from app.logic.commands.messages import CreateChatCommand, CreateChatCommandHandler
-from app.settings.config import Settings
 from app.logic.mediator import Mediator
 
+import punq
 
 
-@lru_cache(1)
-def init_container() -> Container:
-    cont = Container()
+class ContainerConfig:
+    def __init__(self) -> None:
+        self.container = punq.Container()
 
-    cont.register(BaseChatsRepository, MemoryChatRepository)
-    cont.register(CreateChatCommandHandler)
+    def register_services(self) -> None:
+        # Регистрация сервисов и хендлеров
+        self.container.register(BaseChatsRepository, MemoryChatRepository, scope=punq.Scope.singleton)
+        self.container.register(CreateChatCommandHandler)
 
-    def create_mediator():
+    def register_mediator(self) -> None:
         mediator = Mediator()
-
         mediator.register_command(
             CreateChatCommand,
-            [cont.resolve(CreateChatCommandHandler)]
+            [self.container.resolve(CreateChatCommandHandler)]
         )
+        self.container.register(Mediator, factory=lambda: mediator)
 
-        return mediator
+    def build(self) -> punq.Container:
+        self.register_services()
+        self.register_mediator()
+        return self.container
 
-    cont.register(Mediator, factory=create_mediator)
-
-    return cont
-
-
-container = init_container()
+@functools.lru_cache(1)
+def get_container() -> punq.Container:
+    config = ContainerConfig()
+    return config.build()
