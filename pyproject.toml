@@ -12,6 +12,7 @@ uvicorn = "^0.31.1"
 pydantic-settings = "^2.5.2"
 punq = "^0.7.0"
 fastapi-versioning = "^0.10.0"
+motor = "^3.6.0"
 
 
 [tool.poetry.group.dev.dependencies]
