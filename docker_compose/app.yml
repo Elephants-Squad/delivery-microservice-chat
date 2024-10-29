@@ -21,4 +21,10 @@ services:
     env_file:
       - ../.env
     volumes:
-      - ../app/:/app/
+      - ..:/app
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
