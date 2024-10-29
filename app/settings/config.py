@@ -1,4 +1,4 @@
-from pydantic import computed_field, MongoDsn
+from pydantic import computed_field, MongoDsn, Field
 from pydantic_settings import BaseSettings
 from pydantic_settings import SettingsConfigDict
 
@@ -9,13 +9,13 @@ class MongoSettings(BaseSettings):
         extra="ignore"
     )
 
-    port: int
-    name: str
+    port: int = Field(alias="PORT")
+    host: str = Field(alias="HOST")
 
     @computed_field
     @property
     def url(self) -> MongoDsn:
-        return f"mongodb://{self.name}:{self.port}"
+        return f"mongodb://{self.host}:{self.port}"
 
 
 class Settings(BaseSettings):
