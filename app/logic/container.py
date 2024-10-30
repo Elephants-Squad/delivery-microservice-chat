@@ -19,7 +19,6 @@ class ContainerConfig:
 
     def register_repositories(self) -> None:
         settings: Settings = self.container.resolve(Settings)
-        print(settings.database.url)
 
         self.container.register(
             BaseChatsRepository,
