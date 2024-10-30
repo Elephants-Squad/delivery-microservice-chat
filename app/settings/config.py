@@ -9,15 +9,7 @@ class MongoSettings(BaseSettings):
         extra="ignore"
     )
 
-    port: int = Field(alias="MONGO_DB_PORT")
-    host: str = Field(alias="MONGO_DB_HOST")
-    chat_database: str = Field(default="chat", alias="MONGO_DB_CHAT_DATABASE")
-    chat_collection: str = Field(default="chat", alias="MONGO_DB_CHAT_COLLECTION")
-
-    @computed_field
-    @property
-    def url(self) -> MongoDsn:
-        return f"mongodb://{self.host}:{self.port}"
+    url: MongoDsn = Field(alias="MONGO_DB_URL")
 
 
 class Settings(BaseSettings):

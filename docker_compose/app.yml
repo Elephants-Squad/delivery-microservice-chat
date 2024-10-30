@@ -18,10 +18,10 @@ services:
     ]
     ports:
       - "${API_PORT}:8000"
-    env_file:
-      - ../.env
-    volumes:
-      - ..:/app
+
+    environment:
+      MONGO_DB_URL: ${MONGO_DB_URL:?}
+
     networks:
       - backend
 
