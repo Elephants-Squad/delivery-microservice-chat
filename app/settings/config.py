@@ -5,12 +5,14 @@ from pydantic_settings import SettingsConfigDict
 
 class MongoSettings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_prefix="MONGODB",
+        env_prefix="MONGO_DB",
         extra="ignore"
     )
 
-    port: int = Field(alias="PORT")
-    host: str = Field(alias="HOST")
+    port: int = Field(alias="MONGO_DB_PORT")
+    host: str = Field(alias="MONGO_DB_HOST")
+    chat_database: str = Field(default="chat", alias="MONGO_DB_CHAT_DATABASE")
+    chat_collection: str = Field(default="chat", alias="MONGO_DB_CHAT_COLLECTION")
 
     @computed_field
     @property

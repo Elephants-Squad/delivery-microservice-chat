@@ -1,6 +1,7 @@
 import pytest
 import string
 import random
+from uuid import uuid4
 
 from datetime import datetime, UTC
 from app.domain.values.messages import Text, Title
@@ -16,7 +17,7 @@ from app.domain.events.messages import NewMessageReceivedEvent
 ])
 def test_create_message(sentence):
     text = Text(sentence)
-    message = Message(text=text)
+    message = Message(text=text, chat_oid=str(uuid4()))
 
     assert message.text == text
     assert message.created_at.date() == datetime.now(UTC).date()
@@ -58,7 +59,7 @@ def test_create_chat_failure(mimesis_object):
 
 def test_new_message_events():
     text = Text('hello world')
-    message = Message(text=text)
+    message = Message(text=text, chat_oid=str(uuid4()))
 
     title = Title('title')
     chat = Chat(title=title)

@@ -8,6 +8,7 @@ from app.domain.entities.base import BaseEntity
 
 @dataclass(eq=False)
 class Message(BaseEntity):
+    chat_oid: str
     text: Text
     __hash__ = BaseEntity.__hash__
     __eq__ = BaseEntity.__eq__

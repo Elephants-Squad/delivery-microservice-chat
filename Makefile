@@ -20,11 +20,11 @@ all:
 
 .PHONY: app-down
 app-down:
-	$(DC) -f $(APP_FILE) down
+	$(DC) -f $(APP_FILE) ${ENV} down
 
 .PHONY: storages-down
 storages-down:
-	$(DC) -f $(STORAGES_FILE) down
+	$(DC) -f $(STORAGES_FILE) ${ENV} down
 
 .PHONY: app-shell
 app-shell:
