@@ -10,6 +10,8 @@ class MongoSettings(BaseSettings):
     )
 
     url: MongoDsn = Field(alias="MONGO_DB_URL")
+    chat_database: str = Field(default="chat", alias="MONGO_DB_CHAT_DATABASE")
+    chat_collection: str = Field(default="chat", alias="MONGO_DB_CHAT_COLLECTION")
 
 
 class Settings(BaseSettings):

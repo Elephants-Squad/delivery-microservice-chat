@@ -19,10 +19,12 @@ class ContainerConfig:
 
     def register_repositories(self) -> None:
         settings: Settings = self.container.resolve(Settings)
+        print(settings.database.url)
+
         self.container.register(
             BaseChatsRepository,
             factory=lambda: MongoDBChatRepository(
-                mongo_db_client=AsyncIOMotorClient(settings.database.url, serverSelectionTimeoutMS=3000),
+                mongo_db_client=AsyncIOMotorClient(str(settings.database.url), serverSelectionTimeoutMS=3000),
                 mongo_db_db_name=settings.database.chat_database,
                 mongo_db_collection_name=settings.database.chat_collection,
             ),
