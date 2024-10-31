@@ -2,3 +2,7 @@
 .gitignore
 poetry.lock
 test_main.http
+.idea/
+.mypy_cache/
+.pytest_cache/
+.vscode

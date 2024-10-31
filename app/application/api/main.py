@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi_versioning import VersionedFastAPI
 
-from app.logic.container import get_container
 from app.application.api.messages.handlers import router as messages_router
+from app.logic.container import get_container
 
 app = VersionedFastAPI(
     FastAPI(
@@ -13,8 +13,8 @@ app = VersionedFastAPI(
         version="0.1.0",
         debug=True,
     ),
-    version_format='{major}',
-    prefix_format='/api/v{major}'
+    version_format="{major}",
+    prefix_format="/api/v{major}"
 )
 
 app.state.ioc_container = get_container()
